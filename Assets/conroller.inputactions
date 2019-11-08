@@ -1,0 +1,58 @@
+{
+    "name": "conroller",
+    "maps": [
+        {
+            "name": "fire",
+            "id": "aa927982-ce48-40c6-979c-26dfdabe8e5b",
+            "actions": [
+                {
+                    "name": "shoot",
+                    "id": "9b7a0704-2f5d-453f-b126-ae4ec62ee3a8",
+                    "expectedControlLayout": "Button",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "",
+                    "interactions": "",
+                    "bindings": []
+                },
+                {
+                    "name": "reload",
+                    "id": "dc65693b-8a5d-48f0-8dff-3227906cddf1",
+                    "expectedControlLayout": "Button",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "",
+                    "interactions": "",
+                    "bindings": []
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "path": "<HID::᯸ 9999>/button1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "shoot",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "path": "<HID::᯸ 9999>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "reload",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

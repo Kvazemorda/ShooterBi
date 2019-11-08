@@ -15,24 +15,27 @@ public class SaveManager : MonoBehaviour
 
     public void Save(ShootingStatistic shootingStatic)
     {
-        Debug.Log(Helper.Serialize<ShootingStatistic>(shootingStatic));
         PlayerPrefs.SetString("save", Helper.Serialize<ShootingStatistic>(shootingStatic));
         UploadOnServer(shootingStatic);
     }
 
     private void UploadOnServer(ShootingStatistic shooting)
     {
+        API.RequestToUploadShootStatistic(shooting, this);
+    }
+
+    public void saveNewId(ShootingStatistic shooting, string answer)
+    {
         ShootingStatistic shooterId = new ShootingStatistic();
-        API.RequestToUploadShootStatistic(shooting);
-        JsonUtility.FromJsonOverwrite(API.answer, shooterId);
-        Debug.Log(shooterId.shooterId);
+        Debug.Log(answer);
+        JsonUtility.FromJsonOverwrite(answer, shooterId);
+
         if (!shooting.shooterId.Equals(shooterId.shooterId) && shooterId.shooterId != 0)
         {
             Debug.Log("create new ID");
-            Save(shooterId);
+            shooting.shooterId = shooterId.shooterId;
+            Save(shooting);
         }
-
-        /* проверить ответ от сервера и если был создан новый юзер, то сохранить его id в ShootingStatistic. */
     }
 
     public ShootingStatistic LoadShootingStatic()

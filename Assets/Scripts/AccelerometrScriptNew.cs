@@ -49,8 +49,8 @@ public class AccelerometrScriptNew : MonoBehaviour
         xc = Clamp(xc, -horizontalRange, horizontalRange);
         yc = Clamp(yc, -verticalRange, verticalRange);
 
-        transform.RotateAround(target.transform.position + centerOffset, Vector3.up, xc);
-        transform.RotateAround(target.transform.position + centerOffset, Vector3.right, yc);
+        transform.RotateAround(target.transform.localPosition + centerOffset, Vector3.up, xc);
+        transform.RotateAround(target.transform.localPosition + centerOffset, Vector3.right, yc);
 
     }
 

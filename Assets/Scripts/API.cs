@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
+
 
 public class API : MonoBehaviour
 {
     public String answer;
 
     private const string URL = "http://94.73.244.109:8080/server-1.0.0.0/";
-    public void RequestToUploadShootStatistic(ShootingStatistic statistic)
+    public void RequestToUploadShootStatistic(ShootingStatistic statistic, SaveManager manager)
     {
         string hitsParamName = "hits"; 
         int hits = statistic.hit;
@@ -29,17 +28,20 @@ public class API : MonoBehaviour
             shooterIdParamName + "=" + idShooter + "&" +
             isStandParamName + "=" + isStand;
 
-        UnityWebRequest request = UnityWebRequest.Get(URL + "hits" + paramsForRequest);
-        request.SendWebRequest();
+        WWW request = new WWW(URL + "hits" + paramsForRequest);
+        StartCoroutine(Respond(request, manager, statistic));
+        
+    }
 
-        if(request.isNetworkError || request.isHttpError)
+    IEnumerator Respond(WWW request, SaveManager manager, ShootingStatistic statistic)
+    {
+        yield return request;
+        answer = request.text;
+        if(!answer.Equals("hits saved"))
         {
-            Debug.Log(request.error);
+            manager.saveNewId(statistic, answer);
         }
-        else
-        {
-            answer = request.downloadHandler.text;
-            Debug.Log(answer);
-        }
+        
+
     }
 }
